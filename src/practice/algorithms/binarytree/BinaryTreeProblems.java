@@ -7,10 +7,12 @@ import java.util.Map;
 
 public class BinaryTreeProblems {
 	public static void main(String[] args) {
+		int i =0;
 		for(BinaryTreeNode binaryTreeNode : GenerateBinaryTree.getTrees() ){
+			System.out.println("\n\n\n************************ TREE"+(++i)  + "**************************");
 			System.out.println("SIZE OF TREE "+sizeOfTree(binaryTreeNode));
 			System.out.println("HEIGHT OF TREE "+heightOfTree(binaryTreeNode));
-			
+			System.out.println("DIAMETER OF TREE "+diameterOfTree(binaryTreeNode));			
 			
 			System.out.println("IN ORDER RECURSIVE TRAVERSAL ");
 			inorderTraversal(binaryTreeNode);
@@ -107,7 +109,7 @@ public class BinaryTreeProblems {
 	}
 
 	private static void reverseLevelOrder(BinaryTreeNode root){
-
+		
 	}
 
 	private static void leftView(BinaryTreeNode root){
@@ -205,4 +207,13 @@ public class BinaryTreeProblems {
 		allPathFromRoot(root.getRightNode(), nodes, level+1);
 	}
 
+	private static int diameterOfTree(BinaryTreeNode root){
+		if(null == root)
+			return 0;
+		
+		int lTreeHeight = heightOfTree(root.getLeftNode());
+		int rTreeHeight = heightOfTree(root.getRightNode());
+		
+		return Math.max(1+ lTreeHeight + rTreeHeight, Math.max(diameterOfTree(root.getLeftNode()), diameterOfTree(root.getRightNode())));
+	}
 }
