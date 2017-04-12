@@ -1,4 +1,4 @@
-package practice.algorithms.linkedlist;
+package practice.javaprogramming.practice;
 
 import java.util.ArrayList;
 import java.util.HashSet;

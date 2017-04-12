@@ -1,4 +1,4 @@
-package practice.algorithms.linkedlist;
+package practice.interview.indix;
 
 /* package whatever; // don't place package name! */
 import java.io.*;

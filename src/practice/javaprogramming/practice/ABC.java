@@ -1,4 +1,4 @@
-package practice.algorithms.linkedlist;
+package practice.javaprogramming.practice;
 
 class MyThread extends Thread{
 	public MyThread() {
