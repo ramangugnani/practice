@@ -12,7 +12,8 @@ public class BinaryTreeProblems {
 			System.out.println("\n\n\n************************ TREE"+(++i)  + "**************************");
 			System.out.println("SIZE OF TREE "+sizeOfTree(binaryTreeNode));
 			System.out.println("HEIGHT OF TREE "+heightOfTree(binaryTreeNode));
-			System.out.println("DIAMETER OF TREE "+diameterOfTree(binaryTreeNode));			
+			System.out.println("DIAMETER OF TREE "+diameterOfTree(binaryTreeNode));
+			System.out.println("DIAMETER OF TREE NEW "+diameterOfTreeNew(binaryTreeNode));
 			
 			System.out.println("IN ORDER RECURSIVE TRAVERSAL ");
 			inorderTraversal(binaryTreeNode);
@@ -38,6 +39,12 @@ public class BinaryTreeProblems {
 			BinaryTreeNode[] verticalNodes = new BinaryTreeNode[10];
 			allPathFromRoot(binaryTreeNode,verticalNodes,0);
 
+			int k = 6;
+			System.out.println("\nMAX K SUM PATH , K is : "+k);
+			ArrayList<Integer> path = new ArrayList<>();
+			maxKSumPath(binaryTreeNode, path, k);
+			System.out.println(path);
+			
 			System.out.println("\nDONE ");
 		}
 	}
@@ -215,5 +222,31 @@ public class BinaryTreeProblems {
 		int rTreeHeight = heightOfTree(root.getRightNode());
 		
 		return Math.max(1+ lTreeHeight + rTreeHeight, Math.max(diameterOfTree(root.getLeftNode()), diameterOfTree(root.getRightNode())));
+	}
+	
+	private static DiameterReturn diameterOfTreeNew(BinaryTreeNode root){
+		if(null == root)
+			return new DiameterReturn();
+		
+		DiameterReturn lTree = diameterOfTreeNew(root.getLeftNode());
+		DiameterReturn rTree = diameterOfTreeNew(root.getRightNode());
+		
+		DiameterReturn rootData = new DiameterReturn();
+		rootData.diameter = Math.max(1+ lTree.height + rTree.height, Math.max(lTree.diameter,rTree.diameter ));
+		rootData.height = 1+ Math.max(lTree.height , rTree.height);
+		return rootData;
+	}
+	
+	private static void maxKSumPath(BinaryTreeNode root,List<Integer> path,Integer k){
+		if(null == root)
+			return;
+		
+		path.add(root.getData());
+		
+		maxKSumPath(root.getLeftNode(), path, k);
+		
+		maxKSumPath(root.getRightNode(), path, k);
+		
+		
 	}
 }
