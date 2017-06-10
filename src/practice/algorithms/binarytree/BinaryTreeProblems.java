@@ -1,9 +1,14 @@
 package practice.algorithms.binarytree;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTreeProblems {
 	public static void main(String[] args) {
@@ -14,7 +19,7 @@ public class BinaryTreeProblems {
 			System.out.println("HEIGHT OF TREE "+heightOfTree(binaryTreeNode));
 			System.out.println("DIAMETER OF TREE "+diameterOfTree(binaryTreeNode));
 			System.out.println("DIAMETER OF TREE NEW "+diameterOfTreeNew(binaryTreeNode));
-			
+
 			System.out.println("IN ORDER RECURSIVE TRAVERSAL ");
 			inorderTraversal(binaryTreeNode);
 			System.out.println("\nPRE ORDER RECURSIVE TRAVERSAL ");
@@ -23,18 +28,20 @@ public class BinaryTreeProblems {
 			postTraversal(binaryTreeNode);
 			System.out.println("\nLEVEL ORDER TRAVERSAL ");
 			levelOrderTraversal(binaryTreeNode);
+			System.out.println("\nREVERSE LEVEL ORDER TRAVERSAL ");
+			reverseLevelOrder(binaryTreeNode);
 
 			System.out.println("\nMIRROR LEVEL ORDER TRAVERSAL ");
 			BinaryTreeNode reverseBinaryTree = null;
 			reverseBinaryTree = mirrorImage(binaryTreeNode);
 			levelOrderTraversal(reverseBinaryTree);
-			
+
 			System.out.println("\nLEFT VIEW ");
 			leftView(binaryTreeNode);
-			
+
 			System.out.println("\nRIGHT VIEW ");
 			rightView(binaryTreeNode);
-			
+
 			System.out.println("\nALL PATH FROM ROOT");
 			BinaryTreeNode[] verticalNodes = new BinaryTreeNode[10];
 			allPathFromRoot(binaryTreeNode,verticalNodes,0);
@@ -44,7 +51,7 @@ public class BinaryTreeProblems {
 			ArrayList<Integer> path = new ArrayList<>();
 			maxKSumPath(binaryTreeNode, path, k);
 			System.out.println(path);
-			
+
 			System.out.println("\nDONE ");
 		}
 	}
@@ -74,14 +81,20 @@ public class BinaryTreeProblems {
 	}
 
 	private static void levelOrderTraversal(BinaryTreeNode root) {
-		List<BinaryTreeNode>  queue = new ArrayList<>();
+		if(null == root)
+			return;
+
+		Queue<BinaryTreeNode> queue = new LinkedList<>();
 		queue.add(root);
-		while(queue.size() != 0){
-			BinaryTreeNode element = queue.remove(0);
-			System.out.print(element.getData()+ " ");
+		while(! queue.isEmpty()){
+			BinaryTreeNode element = queue.poll();
+			if(null != element)
+				System.out.print(element.getData()+ " ");
+
 			if(null != element.getLeftNode()){
 				queue.add(element.getLeftNode());
 			}
+
 			if(null != element.getRightNode()){
 				queue.add(element.getRightNode());
 			}
@@ -116,20 +129,36 @@ public class BinaryTreeProblems {
 	}
 
 	private static void reverseLevelOrder(BinaryTreeNode root){
-		
+		if(null == root)
+			return;
+		Queue<BinaryTreeNode> queue = new LinkedList<>();
+		queue.add(root);
+		Stack<BinaryTreeNode> stack = new Stack<>();
+		while(!queue.isEmpty()){
+			BinaryTreeNode node = queue.poll();
+			stack.push(node);
+			if(null != node.getRightNode())
+				queue.add(node.getRightNode());
+			if(null != node.getLeftNode())
+				queue.add(node.getLeftNode());
+		}
+
+		while(!stack.isEmpty()){
+			System.out.print(stack.pop().getData()+" ");
+		}
 	}
 
 	private static void leftView(BinaryTreeNode root){
 		if(null == root)
 			return;
-		
+
 		List<BinaryTreeNode>  queue = new ArrayList<>();
 		Map<Integer,ArrayList<Integer>> levelByNodes = new LinkedHashMap<Integer,ArrayList<Integer>>();
 		queue.add(root);
-		// adding delimeter
+		// adding delimiter
 		queue.add(null);
 		int level = 0;
-		
+
 		while(queue.size() != 0){
 			BinaryTreeNode element = queue.remove(0);
 			if(null == element){
@@ -153,23 +182,23 @@ public class BinaryTreeProblems {
 				queue.add(element.getRightNode());
 			}
 		}
-		
+
 		for(Map.Entry<Integer, ArrayList<Integer>> entry : levelByNodes.entrySet()){
 			System.out.print(entry.getValue().get(0)+ " ");
 		}
 	}
-	
+
 	private static void rightView(BinaryTreeNode root){
 		if(null == root)
 			return;
-		
+
 		List<BinaryTreeNode>  queue = new ArrayList<>();
 		Map<Integer,ArrayList<Integer>> levelByNodes = new LinkedHashMap<Integer,ArrayList<Integer>>();
 		queue.add(root);
-		// adding delimeter
+		// adding delimiter
 		queue.add(null);
 		int level = 0;
-		
+
 		while(queue.size() != 0){
 			BinaryTreeNode element = queue.remove(0);
 			if(null == element){
@@ -197,7 +226,7 @@ public class BinaryTreeProblems {
 			System.out.print(entry.getValue().get(entry.getValue().size() -1)+ " ");
 		}
 	}
-	
+
 	private static void allPathFromRoot(BinaryTreeNode root,BinaryTreeNode[] nodes,int level){
 		if(null == root)
 			return;
@@ -217,36 +246,36 @@ public class BinaryTreeProblems {
 	private static int diameterOfTree(BinaryTreeNode root){
 		if(null == root)
 			return 0;
-		
+
 		int lTreeHeight = heightOfTree(root.getLeftNode());
 		int rTreeHeight = heightOfTree(root.getRightNode());
-		
+
 		return Math.max(1+ lTreeHeight + rTreeHeight, Math.max(diameterOfTree(root.getLeftNode()), diameterOfTree(root.getRightNode())));
 	}
-	
+
 	private static DiameterReturn diameterOfTreeNew(BinaryTreeNode root){
 		if(null == root)
 			return new DiameterReturn();
-		
+
 		DiameterReturn lTree = diameterOfTreeNew(root.getLeftNode());
 		DiameterReturn rTree = diameterOfTreeNew(root.getRightNode());
-		
+
 		DiameterReturn rootData = new DiameterReturn();
 		rootData.diameter = Math.max(1+ lTree.height + rTree.height, Math.max(lTree.diameter,rTree.diameter ));
 		rootData.height = 1+ Math.max(lTree.height , rTree.height);
 		return rootData;
 	}
-	
+
 	private static void maxKSumPath(BinaryTreeNode root,List<Integer> path,Integer k){
 		if(null == root)
 			return;
-		
+
 		path.add(root.getData());
-		
+
 		maxKSumPath(root.getLeftNode(), path, k);
-		
+
 		maxKSumPath(root.getRightNode(), path, k);
-		
-		
+
+
 	}
 }

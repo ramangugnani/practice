@@ -33,7 +33,7 @@ public class LargestBSTInGivenBinaryTree {
         MinMax m = new MinMax();
 
         //if either of left or right subtree says its not BST or the data
-        //of this node is not greater/equal than max of left and less than min of right
+        //of this node is not greater/equal than max of left and less than minimum of right
         //then subtree with this node as root will not be BST. 
         //Return false and max size of left and right subtree to parent
         if(leftMinMax.isBst == false || rightMinMax.isBst == false || (leftMinMax.max > node.getData() || rightMinMax.min <= node.getData())){

@@ -1,9 +1,6 @@
 package practice.algorithms.greedy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.PriorityQueue;
 
 public class MergeNFileToSingleFile {
 	public static void main(String[] args) {
@@ -13,26 +10,23 @@ public class MergeNFileToSingleFile {
 	}
 
 	private static int mergeNFileToSingleFile(int[] pageSize) {
-		List<Integer> sortedPageSize = new ArrayList<>();
 		Integer cost = 0;
+		PriorityQueue<Integer> pQueue = new PriorityQueue<>();
 		for(int i = 0 ; i < pageSize.length ; ++i){
-			sortedPageSize.add(pageSize[i]);
+			pQueue.add(pageSize[i]);
 		}
-		Collections.sort(sortedPageSize);
-		Iterator<Integer> itr = sortedPageSize.iterator();
-		while(itr.hasNext()){
-			Integer firstElemenet = itr.next();
-			itr.remove();
-			if(itr.hasNext()){
-				Integer secondElement = itr.next();
-				itr.remove();
-				cost = firstElemenet + secondElement;
-				sortedPageSize.add(firstElemenet + secondElement);
-				Collections.sort(sortedPageSize);
-				itr = sortedPageSize.iterator();
-			}else{
-				break;
-			}
+		
+		while(!pQueue.isEmpty()){
+			Integer firstElemenet = pQueue.poll();
+			
+			if(pQueue.isEmpty())
+				return cost;
+			
+			Integer secondElement = pQueue.poll();
+			
+			cost = firstElemenet+secondElement;
+			pQueue.add(firstElemenet+secondElement);
+
 		}
 		return cost;
 	}

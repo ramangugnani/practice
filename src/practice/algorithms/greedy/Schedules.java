@@ -45,4 +45,29 @@ public class Schedules implements Comparable<Schedules>{
 		return "Schedules ["+"endTime=" + endTime + ", startTime=" + startTime +  "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + endTime;
+		result = prime * result + startTime;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Schedules other = (Schedules) obj;
+		if (endTime != other.endTime)
+			return false;
+		if (startTime != other.startTime)
+			return false;
+		return true;
+	}
+
 }
