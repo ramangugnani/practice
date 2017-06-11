@@ -46,11 +46,9 @@ public class AllCombination {
 	}
 
 	private static void print(char[] output, int len) {
-		//if(len == 3){
-			for(int i = 0 ; i < len; i++){
-				System.out.print(output[i]+" ");
-			}
-			System.out.println();
-		//}
+		for(int i = 0 ; i < len; i++){
+			System.out.print(output[i]+" ");
+		}
+		System.out.println();
 	}
 }

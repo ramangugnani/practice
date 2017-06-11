@@ -29,22 +29,21 @@ public class SubtractTwoLinkedlist {
 		return list3;
 	}
 
-	private static Boolean subtractList(Iterator<Integer> itr1, Iterator<Integer> itr2, LinkedList<Integer> list3) {
-		Boolean isBorrowCalculated = false;
+	private static Integer subtractList(Iterator<Integer> itr1, Iterator<Integer> itr2, LinkedList<Integer> list3) {
 		if(itr1.hasNext()){
 			Integer int1 = itr1.next();
 			Integer int2 = itr2.next();
-			Boolean isBorrow = subtractList(itr1,itr2,list3);
-			if(isBorrow){
-				int1--;
-			}
+			Integer carry = subtractList(itr1,itr2,list3);
+			int1 = int1 + carry;
 			if(int1 < int2){
-				isBorrowCalculated = true;
-				int1 = int1 + 10;
+				list3.addFirst(int1 + 10 -int2);
+				return -1;
+			}else{
+				list3.addFirst(int1  -int2);
+				return 0;
 			}
-			list3.addFirst(int1-int2);
 		}
-		return isBorrowCalculated;
+		return 0;
 	}
 
 	private static Integer calculateLongestList(LinkedList<Integer> list1, LinkedList<Integer> list2) {
