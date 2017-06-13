@@ -13,21 +13,21 @@ public class KnapSack {
 	private static int maximumWeight(int[] weightArr, int[] cost, int sackWeight) {
 		int[] maximumSubWeight  = new int[sackWeight+1];
 		for(int subWeight = 1 ; subWeight <= sackWeight ; ++subWeight){
-			int maxSubWeight = Integer.MIN_VALUE;
+			int maxSubCost = Integer.MIN_VALUE;
 
 			for(int weightIndex = 0; weightIndex < weightArr.length ; weightIndex++){
 				if(subWeight == weightArr[weightIndex])
-					maxSubWeight = cost[weightIndex];
+					maxSubCost = cost[weightIndex];
 			}
 
 			for(int weightIndex = 0; weightIndex < weightArr.length ; weightIndex++){
 				int weight = weightArr[weightIndex];
 				if(weight <= subWeight){
-					/* 				 subweight cost    cost with weight + cost of local Maximum Sub Weitgh*/
-					maxSubWeight = Math.max(maxSubWeight,cost[weightIndex] + maximumSubWeight[subWeight-weight]); 
+					/* 				 sub weight cost    cost with weight + cost of local maximum sub weight  */
+					maxSubCost = Math.max(maxSubCost,cost[weightIndex] + maximumSubWeight[subWeight-weight]); 
 				}
 			}
-			maximumSubWeight[subWeight] = maxSubWeight;
+			maximumSubWeight[subWeight] = maxSubCost;
 		}
 		return maximumSubWeight[sackWeight];
 	}
