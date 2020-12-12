@@ -3,7 +3,7 @@ package practice.leetcode.problems;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import practice.leetcode.may.week3.TreeNode;
+import practice.leetcode.TreeNode;
 
 public class MinimumDepthOfBinaryTree_111 {
     public static void main(String[] args) {

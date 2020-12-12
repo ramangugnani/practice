@@ -2,7 +2,7 @@ package practice.leetcode.problems;
 
 import java.util.*;
 
-import practice.leetcode.may.week3.TreeNode;
+import practice.leetcode.TreeNode;
 
 public class BinaryTreeLevelOrderTraversalII_107 {
     public static void main(String[] args) {

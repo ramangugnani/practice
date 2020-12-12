@@ -2,6 +2,8 @@ package practice.leetcode.may.week3;
 
 import java.util.List;
 
+import practice.leetcode.TreeNode;
+
 public class KthSmallestElementInaBst {
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);

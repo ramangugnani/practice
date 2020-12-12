@@ -1,6 +1,6 @@
 package practice.leetcode.problems;
 
-import practice.leetcode.may.week3.TreeNode;
+import practice.leetcode.TreeNode;
 
 public class BinarySearchTreeIterator_119Main {
     public static void main(String[] args) {

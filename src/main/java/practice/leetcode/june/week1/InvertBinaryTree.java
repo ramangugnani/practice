@@ -1,6 +1,6 @@
 package practice.leetcode.june.week1;
 
-import practice.leetcode.may.week3.TreeNode;
+import practice.leetcode.TreeNode;
 
 public class InvertBinaryTree {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package practice.leetcode.may.week3;
+package practice.leetcode;
 
 //Definition for a binary tree node.
 public class TreeNode {

@@ -1,6 +1,6 @@
 package practice.leetcode.june.week3;
 
-import practice.leetcode.may.week3.TreeNode;
+import practice.leetcode.TreeNode;
 
 public class SearchInABinarySearchTree {
 	public static void main(String[] args) {

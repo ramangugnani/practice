@@ -1,6 +1,6 @@
 package practice.leetcode.problems;
 
-import practice.leetcode.may.week3.TreeNode;
+import practice.leetcode.TreeNode;
 
 public class LowestCommonAncestorOfaBinarySearchTree_235 {
     public static void main(String[] args) {
