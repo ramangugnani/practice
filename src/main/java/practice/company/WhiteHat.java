@@ -1,4 +1,4 @@
-package practice.javaprogramming;
+package practice.company;
 
 /*
  * m X n matrix
