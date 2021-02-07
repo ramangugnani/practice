@@ -1,4 +1,4 @@
-package practice.interview.microsoft3;
+package practice.interview.microsoft;
 
 import java.util.HashMap;
 import java.util.Map;

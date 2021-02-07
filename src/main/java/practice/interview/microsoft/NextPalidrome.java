@@ -1,4 +1,4 @@
-package practice.interview.microsoft1;
+package practice.interview.microsoft;
 
 public class NextPalidrome {
 	public static void main(String[] args) {
